@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 
 import java.util.Date;
 import java.util.List;
@@ -21,11 +23,18 @@ public class GestionHopitalApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        patientRepository.save(new Patient(null,"Patient 1",new Date(),true,40));
-        patientRepository.save(new Patient(null,"Patient 2",new Date(),false,80));
-        patientRepository.save(new Patient(null,"Patient 3",new Date(),true,55));
-        List<Patient> patientList= patientRepository.findAll();
-        patientList.forEach(p->{
+        for(int i=0;i<100;i++){
+            patientRepository.save(new Patient(null,"Patient "+i,new Date(),true, (int) (Math.random() * 100)));
+
+        }
+
+
+        Page<Patient> patientList= patientRepository.findAll(PageRequest.of(3,5));
+        System.out.println(patientList.getTotalPages());
+        System.out.println(patientList.getTotalElements());
+        System.out.println(patientList.getNumber());
+        List<Patient> content=patientList.getContent();
+        content.forEach(p->{
             System.out.println("-----------------------------------------------------------");
             System.out.println(p.getId());
             System.out.println(p.getNom());
