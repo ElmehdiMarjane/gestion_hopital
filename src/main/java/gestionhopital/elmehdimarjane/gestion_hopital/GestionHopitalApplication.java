@@ -24,13 +24,15 @@ public class GestionHopitalApplication {
     @Bean
     CommandLineRunner commandLineRunner(PatientRepository patientRepository){
 return args -> {
+/*
 
-    for(int i=0;i<100;i++){
+    for(int i=10;i<50;i++){
         patientRepository.save(new Patient(null,"Patient "+i,new Date(),Math.random()>0.5?true:false, (int) (Math.random() * 100)));
 
     }
+*/
 
-    patientRepository.deleteById(1L);
+
     Page<Patient> patientList= patientRepository.findAll(PageRequest.of(0,10));
     System.out.println(patientList.getTotalPages());
     System.out.println(patientList.getTotalElements());
