@@ -11,19 +11,27 @@
         <div class="card-header">Patient List</div>
 
         <div class="card-body">
+            <form method="get" th:action="@{index}">
+                <label for="Keyword"> Nome</label>
+                <input type="text" name="Keyword" id="Keyword" th:value="${Keyword}">
+                <button type="submit" class="btn btn-secondary">Recherche</button>
+
+            </form>
             <table class="table">
 
                 <thead>
                 <tr> <th>Id</th> <th>Nom</th> <th>Date Naissance</th> <th>Malade</th> <th>Score</th> </tr>
                 </thead>
-                <tbody >
+                <tbody>
                 <tr th:each="p:${ListPatient}">
                     <td th:text="${p.getId()}"></td>
                     <td th:text="${p.getNom()}"></td>
-                    <td th:text="${p.getDateNaissance()}"></td>
+                    <td th:text="${p.getDate()}"></td>
                     <td th:text="${p.isMalade()}"></td>
                     <td th:text="${p.getScore()}"></td>
-
+                    <td>
+                        <a class="btn btn-danger" th:href="@{delete (id=${p.id},page=${CurrentPage},Keyword=${Keyword})}" onclick="return confirm('Etes vous sure?')">X</a>
+                    </td>
 
                 </tr>
                 </tbody>

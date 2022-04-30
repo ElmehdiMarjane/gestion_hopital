@@ -14,10 +14,10 @@ public class Patient {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(length = 50)
-    private String Nom;
+    private String nom;
     @Temporal(TemporalType.DATE)
-    private Date dateNaissance;
-    private boolean Malade;
-    private int Score;
+    private Date date;
+    private boolean malade;
+    private int score;
 
 }

@@ -24,13 +24,13 @@ public class GestionHopitalApplication {
     @Bean
     CommandLineRunner commandLineRunner(PatientRepository patientRepository){
 return args -> {
-/*
 
-    for(int i=10;i<50;i++){
+
+/*    for(int i=0;i<50;i++){
         patientRepository.save(new Patient(null,"Patient "+i,new Date(),Math.random()>0.5?true:false, (int) (Math.random() * 100)));
 
-    }
-*/
+    }*/
+
 
 
     Page<Patient> patientList= patientRepository.findAll(PageRequest.of(0,10));
@@ -42,7 +42,7 @@ return args -> {
         System.out.println("-----------------------------------------------------------");
         System.out.println(p.getId());
         System.out.println(p.getNom());
-        System.out.println(p.getDateNaissance());
+        System.out.println(p.getDate());
         System.out.println(p.getScore());
         System.out.println(p.isMalade());
         System.out.println("-----------------------------------------------------------");
