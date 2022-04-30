@@ -1,10 +1,12 @@
 package gestionhopital.elmehdimarjane.gestion_hopital.controllers;
 
 
+
 import gestionhopital.elmehdimarjane.gestion_hopital.entities.Patient;
 import gestionhopital.elmehdimarjane.gestion_hopital.repositories.PatientRepository;
+
 import lombok.*;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
@@ -54,6 +56,18 @@ public class PatientController {
 
         return "redirect:/index";
 
+    }
+
+    @GetMapping("/formPatient")
+    public String formPatient(Model model){
+        model.addAttribute("patient",new Patient());
+        return "formPatient";
+    }
+    @PostMapping(path = "/save")
+    public String save(Patient patient){
+        patientRepository.save(patient);
+
+        return "formPatient";
     }
 
 

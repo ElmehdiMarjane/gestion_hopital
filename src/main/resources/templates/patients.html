@@ -1,57 +1,65 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+layout:decorate="Menu">
 <head>
     <meta charset="UTF-8">
     <title>$Title$</title>
     <link rel="stylesheet" href="/webjars/bootstrap/5.1.3/css/bootstrap.min.css">
 </head>
 <body>
-<div class="container mt-2">
-    <div class="card">
-        <div class="card-header">Patient List</div>
+<div layout:fragment="Content">
 
-        <div class="card-body">
-            <form method="get" th:action="@{index}">
-                <label for="Keyword"> Nome</label>
-                <input type="text" name="Keyword" id="Keyword" th:value="${Keyword}">
-                <button type="submit" class="btn btn-secondary">Recherche</button>
+    <div class="container mt-2">
+        <div class="card">
+            <div class="card-header">Patient List</div>
 
-            </form>
-            <table class="table">
+            <div class="card-body">
+                <form method="get" th:action="@{index}">
+                    <label for="Keyword"> Nome</label>
+                    <input type="text" name="Keyword" id="Keyword" th:value="${Keyword}">
+                    <button type="submit" class="btn btn-secondary">Recherche</button>
 
-                <thead>
-                <tr> <th>Id</th> <th>Nom</th> <th>Date Naissance</th> <th>Malade</th> <th>Score</th> </tr>
-                </thead>
-                <tbody>
-                <tr th:each="p:${ListPatient}">
-                    <td th:text="${p.getId()}"></td>
-                    <td th:text="${p.getNom()}"></td>
-                    <td th:text="${p.getDate()}"></td>
-                    <td th:text="${p.isMalade()}"></td>
-                    <td th:text="${p.getScore()}"></td>
-                    <td>
-                        <a class="btn btn-danger" th:href="@{delete (id=${p.id},page=${CurrentPage},Keyword=${Keyword})}" onclick="return confirm('Etes vous sure?')">X</a>
-                    </td>
+                </form>
+                <table class="table">
 
-                </tr>
-                </tbody>
-            </table>
-            <ul class="nav nav-pills">
-                <li th:each="page,status:${Pages}">
+                    <thead>
+                    <tr> <th>Id</th> <th>Nom</th> <th>Date Naissance</th> <th>Malade</th> <th>Score</th> </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="p:${ListPatient}">
+                        <td th:text="${p.getId()}"></td>
+                        <td th:text="${p.getNom()}"></td>
+                        <td th:text="${p.getDate()}"></td>
+                        <td th:text="${p.isMalade()}"></td>
+                        <td th:text="${p.getScore()}"></td>
+                        <td>
+                            <a class="btn btn-danger" th:href="@{delete (id=${p.id},page=${CurrentPage},Keyword=${Keyword})}" onclick="return confirm('Etes vous sure?')">X</a>
+                        </td>
 
-                    <a th:class="${status.index==CurrentPage?'btn btn-secondary m-lg-2':'btn btn-outline-secondary m-lg-2'}" class="btn btn-outline-secondary m-lg-2"
-                       th:text="${status.index}"
-                       th:href="@{index(page=${status.index})}"
-                    >
+                    </tr>
+                    </tbody>
+                </table>
+                <ul class="nav nav-pills">
+                    <li th:each="page,status:${Pages}">
+
+                        <a th:class="${status.index==CurrentPage?'btn btn-secondary m-lg-2':'btn btn-outline-secondary m-lg-2'}" class="btn btn-outline-secondary m-lg-2"
+                           th:text="${status.index}"
+                           th:href="@{index(page=${status.index})}"
+                        >
 
 
-                    </a>
-                </li>
-            </ul>
+                        </a>
+                    </li>
+                </ul>
 
+            </div>
         </div>
     </div>
+
+
+
 </div>
+
 
 </body>
 </html>

@@ -1,6 +1,8 @@
 package gestionhopital.elmehdimarjane.gestion_hopital.entities;
 
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.util.*;
 
@@ -16,6 +18,7 @@ public class Patient {
     @Column(length = 50)
     private String nom;
     @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "mm-dd-yyyy")
     private Date date;
     private boolean malade;
     private int score;
