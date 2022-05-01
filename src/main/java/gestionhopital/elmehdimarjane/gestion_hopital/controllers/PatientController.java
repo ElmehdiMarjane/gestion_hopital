@@ -11,8 +11,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -63,8 +65,14 @@ public class PatientController {
         model.addAttribute("patient",new Patient());
         return "formPatient";
     }
+
+
+
     @PostMapping(path = "/save")
-    public String save(Patient patient){
+    public String save(Model model,@Valid Patient patient, BindingResult bindingResult){
+
+        if(bindingResult.hasErrors()) return "formPatient";
+
         patientRepository.save(patient);
 
         return "formPatient";
